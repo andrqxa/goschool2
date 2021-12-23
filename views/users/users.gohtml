@@ -1,0 +1,19 @@
+{{define "users"}}
+    <p><b>Members</b></p>
+    <table align="center">
+        <tr>
+           <th>#</th>
+           <th>Name</th>
+           <th>Email</th>
+           <th>Registration date</th>
+        </tr>
+        {{ range .Users }}
+        <tr>
+            <td class="counterCell"></td>         
+            <td>{{ .Name }}</td>
+            <td>{{ .Email }}</td>
+            <td>{{ .Registration }}</td>
+        </tr>
+        {{end}}
+    </table>
+{{end}}

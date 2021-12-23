@@ -1,0 +1,14 @@
+{{define "newMember"}}
+<p>New member</p>
+
+    <form name="user" action="/add" method="post">
+        <p><label for="nm"><b>Name:</b></label>
+        <input id="nm" type="text" size="40" name="name" placeholder="Petro Petrenko"/>
+        </p>
+        <p><label for="em"><b>Name:</b></label>
+            <input id="em" type="email" size="40" name="email" placeholder="p.petrenko@gmail.com"/>
+        </p>
+        <p><input type="submit" value="Submit">
+         <input type="reset" value="Clean"></p>
+    </form>
+{{end}}
