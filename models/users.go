@@ -5,22 +5,22 @@ import (
 	"time"
 )
 
-type date struct {
+type Date struct {
 	day   int
 	month int
 	year  int
 }
 
-func newDate() date {
+func NewDate() Date {
 	t := time.Now()
-	return date{
+	return Date{
 		day:   t.Day(),
 		month: int(t.Month()),
 		year:  t.Year(),
 	}
 }
 
-func (d date) String() string {
+func (d Date) String() string {
 	return fmt.Sprintf("%d.%d.%d", d.day, d.month, d.year)
 }
 
@@ -28,5 +28,5 @@ func (d date) String() string {
 type User struct {
 	Name             string
 	Email            string
-	RegistrationDate date
+	RegistrationDate Date
 }

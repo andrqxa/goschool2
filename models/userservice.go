@@ -6,7 +6,7 @@ type UserService interface {
 }
 
 // NewUserService ...
-func NewUserService(connectionInfo string) (*userService, error) {
+func NewUserService() (*userService, error) {
 	uo, err := newUserOrm()
 	if err != nil {
 		return nil, err
