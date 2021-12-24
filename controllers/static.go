@@ -5,8 +5,6 @@ import (
 )
 
 type Static struct {
-	Header  *views.View
-	Footer  *views.View
 	Welcome *views.View
 }
 
