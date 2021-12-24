@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"github.com/andrqxa/goschool2/views"
+	"goschool/views"
 )
 
 type Static struct {
@@ -12,8 +12,6 @@ type Static struct {
 
 func NewStatic() *Static {
 	return &Static{
-		Header:  views.NewView("main", "static/header"),
-		Footer:  views.NewView("main", "static/footer"),
 		Welcome: views.NewView("main", "static/welcome"),
 	}
 }

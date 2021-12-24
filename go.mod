@@ -1,4 +1,4 @@
-module github.com/andrqxa/goschool2
+module goschool
 
 go 1.17
 

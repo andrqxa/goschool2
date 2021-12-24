@@ -29,7 +29,7 @@ func (v *View) Render(w http.ResponseWriter, data interface{}) error {
 	return v.Template.ExecuteTemplate(w, v.Layout, data)
 }
 
-// layoutFiles returns a clise of strings representing the layout files used in
+// layoutFiles returns a slice of strings representing the layout files used in
 // our applicaton.
 func layoutFiles() []string {
 	files, err := filepath.Glob(LayoutDir + "*" + TemplateExt)

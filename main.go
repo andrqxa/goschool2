@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/andrqxa/goschool2/controllers"
-	"github.com/andrqxa/goschool2/models"
+	"goschool/controllers"
+	"goschool/models"
+
 	"github.com/gorilla/mux"
 )
 
@@ -20,10 +21,11 @@ func main() {
 	us, err := models.NewUserService()
 	must(err)
 
-	_ = controllers.NewStatic()
+	staticC := controllers.NewStatic()
 	usersC := controllers.NewUsers(us)
 
 	r := mux.NewRouter()
+	r.Handle("/", staticC.Welcome).Methods("GET")
 	r.HandleFunc("/", usersC.New).Methods("GET")
 	r.HandleFunc("/", usersC.Create).Methods("POST")
 	fmt.Println("Starting the server on :3000...")

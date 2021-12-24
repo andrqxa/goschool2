@@ -3,8 +3,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/andrqxa/goschool2/models"
-	"github.com/andrqxa/goschool2/views"
+	"goschool/models"
+	"goschool/views"
 )
 
 // NewUser is used to create a new Users controller.
