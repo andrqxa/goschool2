@@ -1,13 +1,15 @@
 package apiserver
 
-// import (
-// 	"fmt"
-// 	"net/http"
-// 	"text/template"
+import (
+	"fmt"
+	"goschool/controllers"
+	"goschool/helpers"
+	"goschool/models"
+	"net/http"
 
-// 	"github.com/gorilla/mux"
-// 	"github.com/sirupsen/logrus"
-// )
+	"github.com/gorilla/mux"
+	"github.com/sirupsen/logrus"
+)
 
 // var (
 // 	tpl      *template.Template
@@ -20,48 +22,57 @@ package apiserver
 // 	allUsers = model.NewUsers()
 // }
 
-// // APIServer ...
-// type APIServer struct {
-// 	config *Config
-// 	logger *logrus.Logger
-// 	router *mux.Router
-// }
+// APIServer ...
+type APIServer struct {
+	config *Config
+	logger *logrus.Logger
+	router *mux.Router
+}
 
-// // New ...
-// func New(newconfig *Config) *APIServer {
-// 	return &APIServer{
-// 		config: newconfig,
-// 		logger: logrus.New(),
-// 		router: mux.NewRouter(),
-// 	}
-// }
+// New ...
+func New(newconfig *Config) *APIServer {
+	return &APIServer{
+		config: newconfig,
+		logger: logrus.New(),
+		router: mux.NewRouter(),
+	}
+}
 
-// // Start ...
-// func (s *APIServer) Start() error {
-// 	if err := s.configureLogger(); err != nil {
-// 		return err
-// 	}
+// Start ...
+func (s *APIServer) Start() error {
+	if err := s.configureLogger(); err != nil {
+		return err
+	}
 
-// 	s.configureRouter()
+	s.configureRouter()
 
-// 	s.logger.Info("starting api server")
+	s.logger.Info(fmt.Sprintf("starting api server at %s", s.config.BindAddr))
 
-// 	return http.ListenAndServe(s.config.BindAddr, s.router)
-// }
+	return http.ListenAndServe(s.config.BindAddr, s.router)
+}
 
-// func (s *APIServer) configureLogger() error {
-// 	level, err := logrus.ParseLevel(s.config.LogLevel)
-// 	if err != nil {
-// 		return err
-// 	}
-// 	s.logger.SetLevel(level)
-// 	return nil
-// }
+func (s *APIServer) configureLogger() error {
+	level, err := logrus.ParseLevel(s.config.LogLevel)
+	if err != nil {
+		return err
+	}
+	s.logger.SetLevel(level)
+	return nil
+}
 
-// func (s *APIServer) configureRouter() {
-// 	s.router.HandleFunc("/", s.handleRoot())
-// 	s.router.HandleFunc("/add", s.handleAdd())
-// }
+func (s *APIServer) configureRouter() {
+	us, err := models.NewUserService()
+	helpers.Must(err)
+	staticC := controllers.NewStatic()
+	usersC := controllers.NewUsers(us)
+
+	s.router.Handle("/", staticC.Welcome).Methods("GET")
+	s.router.HandleFunc("/", usersC.New).Methods("GET")
+	s.router.HandleFunc("/", usersC.Create).Methods("POST")
+
+	// s.router.HandleFunc("/", s.handleRoot())
+	// s.router.HandleFunc("/add", s.handleAdd())
+}
 
 // func (s *APIServer) handleRoot() http.HandlerFunc {
 // 	return func(w http.ResponseWriter, r *http.Request) {
