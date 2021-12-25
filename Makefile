@@ -1,6 +1,6 @@
 .PHONY: build
 build:
-	go build -v .
+	go build -v ./cmd/goschool
 
 .PHONY: test
 test:
