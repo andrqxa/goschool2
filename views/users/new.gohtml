@@ -1,14 +1,32 @@
-{{define "newMember"}}
-<p>New member</p>
+{{define "yield"}}
+    <h1>{{.}}</h1>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">New member</h3>
+                </div>
+                <div class="panel-body">
+                    {{template "newMember"}}
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <form name="user" action="/add" method="post">
-        <p><label for="nm"><b>Name:</b></label>
-        <input id="nm" type="text" size="40" name="name" placeholder="Petro Petrenko"/>
-        </p>
-        <p><label for="em"><b>Name:</b></label>
-            <input id="em" type="email" size="40" name="email" placeholder="p.petrenko@gmail.com"/>
-        </p>
-        <p><input type="submit" value="Submit">
-         <input type="reset" value="Clean"></p>
+{{end}}
+
+{{define "newMember"}}
+    <form name="user" action="/add" method="POST">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" class="form-control" id="name" placeholder="Petro Petrenko">
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="p.petrenko@gmail.com">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="reset" class="btn btn-primary">Clean</button>
     </form>
 {{end}}

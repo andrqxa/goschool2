@@ -28,9 +28,9 @@ func main() {
 	r.Handle("/", staticC.Welcome).Methods("GET")
 	r.HandleFunc("/", usersC.New).Methods("GET")
 	r.HandleFunc("/", usersC.Create).Methods("POST")
-	fmt.Println("Starting the server on :3000...")
+	fmt.Println("Starting the server on :3030...")
 
-	http.ListenAndServe(":3000", r)
+	http.ListenAndServe(":3030", r)
 }
 
 // */

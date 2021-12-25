@@ -1,3 +1,11 @@
+{{define "yield"}}
+    <h1>{{.}}</h1>
+    <div class="row">
+        {{template "users"}}
+    </div>
+
+{{end}}
+
 {{define "users"}}
     <p class="text-center"><b>Members</b></p>
     <table class="table table-bordered">
