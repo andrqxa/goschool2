@@ -1,6 +1,7 @@
 package views
 
 import (
+	"goschool/helpers"
 	"html/template"
 	"net/http"
 	"path/filepath"
@@ -18,9 +19,7 @@ type View struct {
 }
 
 func (v *View) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if err := v.Render(w, nil); err != nil {
-		panic(err)
-	}
+	helpers.PanicIf(v.Render(w, nil))
 }
 
 // Render is used to render the view with predefined layout.
@@ -33,9 +32,7 @@ func (v *View) Render(w http.ResponseWriter, data interface{}) error {
 // our applicaton.
 func layoutFiles() []string {
 	files, err := filepath.Glob(LayoutDir + "*" + TemplateExt)
-	if err != nil {
-		panic(err)
-	}
+	helpers.PanicIf(err)
 	return files
 }
 
@@ -44,9 +41,7 @@ func NewView(layout string, files ...string) *View {
 	addTemplateExt(files)
 	files = append(files, layoutFiles()...)
 	templ, err := template.ParseFiles(files...)
-	if err != nil {
-		panic(err)
-	}
+	helpers.PanicIf(err)
 	return &View{
 		Template: templ,
 		Layout:   layout,

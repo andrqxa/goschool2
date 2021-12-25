@@ -62,7 +62,7 @@ func (s *APIServer) configureLogger() error {
 
 func (s *APIServer) configureRouter() {
 	us, err := models.NewUserService()
-	helpers.Must(err)
+	helpers.PanicIf(err)
 	staticC := controllers.NewStatic()
 	usersC := controllers.NewUsers(us)
 
